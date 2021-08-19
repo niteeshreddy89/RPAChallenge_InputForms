@@ -162,7 +162,7 @@
               <Variable x:TypeArguments="x:String" Name="str_Address" />
               <Variable x:TypeArguments="x:String" Name="str_Email" />
               <Variable x:TypeArguments="x:String" Name="str_PhoneNumber" />
-              <Variable x:TypeArguments="x:String" Name="str_TransactionID" />
+              <Variable x:TypeArguments="x:String" Name="str_QueueReference" />
             </Sequence.Variables>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -231,19 +231,16 @@
                 </scg:List>
               </ui:MultipleAssign.AssignOperations>
             </ui:MultipleAssign>
-            <Assign DisplayName="Assign - Transaction ID" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+            <Assign DisplayName="Assign - Queue Reference" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_5">
               <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[str_TransactionID]</OutArgument>
+                <OutArgument x:TypeArguments="x:String">[str_QueueReference]</OutArgument>
               </Assign.To>
               <Assign.Value>
                 <InArgument x:TypeArguments="x:String">[Left(str_FirstName.ToUpper.Trim, 3)+Left(str_LastName.ToUpper.Trim, 3)+"_"+Left(str_PhoneNumber.ToUpper.Trim,1)+"X"+Right(str_PhoneNumber.ToUpper.Trim, 3)+"_"+now.ToString("ddMMMyyyy_hhmmss").ToUpper]</InArgument>
               </Assign.Value>
             </Assign>
-            <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="AddQueueItem_1" Priority="Normal" QueueType="[in_OrchestratorQueueName]" Reference="[str_TransactionID]">
+            <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="AddQueueItem_1" Priority="Normal" QueueType="[in_OrchestratorQueueName]" Reference="[str_QueueReference]">
               <ui:AddQueueItem.ItemInformation>
-                <InArgument x:TypeArguments="x:String" x:Key="TransactionID">
-                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="str_TransactionID" />
-                </InArgument>
                 <InArgument x:TypeArguments="x:String" x:Key="First Name">
                   <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="str_FirstName" />
                 </InArgument>
