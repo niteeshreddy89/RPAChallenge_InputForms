@@ -1,19 +1,19 @@
 {
   "name": "RPAChallenge_InputFormsPerformer",
-  "description": "Logic for working on the RPA Challenge - Input Forms: This flow processes the transactions available in the orchestrator queue",
+  "description": "Logic for working on the RPA Challenge - Input Forms: This flow retrieves the transaction items from Orchestrator queue, enters the information in the RPA Challenge website & submits the form. The same steps will be followed for all the transactions availabale in the queue.",
   "main": "Main.xaml",
   "dependencies": {
     "Microsoft.Activities.Extensions": "[2.0.6.9]",
-    "UiPath.Excel.Activities": "[2.10.4]",
+    "UiPath.Excel.Activities": "[2.11.0-preview]",
     "UiPath.Mail.Activities": "[1.11.0-preview]",
-    "UiPath.System.Activities": "[21.4.1]",
-    "UiPath.UIAutomation.Activities": "[21.4.4]"
+    "UiPath.System.Activities": "[21.6.1-preview]",
+    "UiPath.UIAutomation.Activities": "[21.6.1-preview]"
   },
   "webServices": [],
   "entitiesStores": [],
   "schemaVersion": "4.0",
   "studioVersion": "21.4.4.0",
-  "projectVersion": "1.0.1",
+  "projectVersion": "1.0.3",
   "runtimeOptions": {
     "autoDispose": false,
     "isPausable": true,

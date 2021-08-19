@@ -62,14 +62,10 @@
     <ui:LogMessage DisplayName="Log message (close applications)" sap:VirtualizedContainerService.HintSize="438,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;Closing applications...&quot;]" />
     <TryCatch DisplayName="Try Catch - Close Browser" sap:VirtualizedContainerService.HintSize="438,295" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <TryCatch.Variables>
-        <Variable x:TypeArguments="x:String" Name="str_Browser">
-          <Variable.Default>
-            <Literal x:TypeArguments="x:String">msedege.exe</Literal>
-          </Variable.Default>
-        </Variable>
+        <Variable x:TypeArguments="x:String" Default="msedge.exe" Name="str_Browser" />
       </TryCatch.Variables>
       <TryCatch.Try>
-        <ui:CloseWindow TimeoutMS="{x:Null}" UseWindow="{x:Null}" DisplayName="Close Window" sap:VirtualizedContainerService.HintSize="334,68" sap2010:WorkflowViewState.IdRef="CloseWindow_1" Selector="[String.Format(&quot;&lt;html app='{0}' title='*' /&gt;&quot;, str_Browser)]" WaitForReady="COMPLETE" />
+        <ui:CloseWindow TimeoutMS="{x:Null}" UseWindow="{x:Null}" DisplayName="Close Window" sap:VirtualizedContainerService.HintSize="334,68" sap2010:WorkflowViewState.IdRef="CloseWindow_1" Selector="[String.Format(&quot;&lt;html app='{0}' /&gt;&quot;, str_Browser)]" WaitForReady="COMPLETE" />
       </TryCatch.Try>
       <TryCatch.Catches>
         <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
