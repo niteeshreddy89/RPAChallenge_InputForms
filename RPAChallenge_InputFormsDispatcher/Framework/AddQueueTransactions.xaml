@@ -7,10 +7,10 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>654,1893</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>654,1993</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>AddTransactionItems_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="56">
+    <scg:List x:TypeArguments="x:String" Capacity="30">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -78,7 +78,7 @@
       <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="AddQueueTransactions" sap:VirtualizedContainerService.HintSize="625,1728" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="AddQueueTransactions" sap:VirtualizedContainerService.HintSize="625,1828" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="str_InputSheetName" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_InputData" />
@@ -147,13 +147,13 @@
         </InArgument>
       </ui:ReadRange.Range>
     </ui:ReadRange>
-    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dt_InputData]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="583,658" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
+    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dt_InputData]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="583,758" sap2010:WorkflowViewState.IdRef="ForEachRow_2">
       <ui:ForEachRow.Body>
         <ActivityAction x:TypeArguments="sd:DataRow">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,538" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,638" sap2010:WorkflowViewState.IdRef="Sequence_4">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:String" Name="str_FirstName" />
               <Variable x:TypeArguments="x:String" Name="str_LastName" />
@@ -162,6 +162,7 @@
               <Variable x:TypeArguments="x:String" Name="str_Address" />
               <Variable x:TypeArguments="x:String" Name="str_Email" />
               <Variable x:TypeArguments="x:String" Name="str_PhoneNumber" />
+              <Variable x:TypeArguments="x:String" Name="str_TransactionID" />
             </Sequence.Variables>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -230,15 +231,40 @@
                 </scg:List>
               </ui:MultipleAssign.AssignOperations>
             </ui:MultipleAssign>
-            <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="AddQueueItem_1" Priority="Normal" QueueType="[in_OrchestratorQueueName]">
+            <Assign DisplayName="Assign - Transaction ID" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_5">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[str_TransactionID]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[Left(str_FirstName.ToUpper.Trim, 3)+Left(str_LastName.ToUpper.Trim, 3)+"_"+Left(str_PhoneNumber.ToUpper.Trim,1)+"X"+Right(str_PhoneNumber.ToUpper.Trim, 3)+"_"+now.ToString("ddMMMyyyy_hhmmss").ToUpper]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item" sap:VirtualizedContainerService.HintSize="334,22" sap2010:WorkflowViewState.IdRef="AddQueueItem_1" Priority="Normal" QueueType="[in_OrchestratorQueueName]" Reference="[str_TransactionID]">
               <ui:AddQueueItem.ItemInformation>
-                <InArgument x:TypeArguments="x:String" x:Key="First Name">[str_FirstName]</InArgument>
-                <InArgument x:TypeArguments="x:String" x:Key="Last Name">[str_LastName]</InArgument>
-                <InArgument x:TypeArguments="x:String" x:Key="Company Name">[str_CompanyName]</InArgument>
-                <InArgument x:TypeArguments="x:String" x:Key="Role in Company">[str_RoleInCompany]</InArgument>
-                <InArgument x:TypeArguments="x:String" x:Key="Address">[str_Address]</InArgument>
-                <InArgument x:TypeArguments="x:String" x:Key="Email">[str_Email]</InArgument>
-                <InArgument x:TypeArguments="x:String" x:Key="Phone Number">[str_PhoneNumber]</InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="TransactionID">
+                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="str_TransactionID" />
+                </InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="First Name">
+                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="str_FirstName" />
+                </InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="Last Name">
+                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="str_LastName" />
+                </InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="Company Name">
+                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="str_CompanyName" />
+                </InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="Role in Company">
+                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="str_RoleInCompany" />
+                </InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="Address">
+                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="str_Address" />
+                </InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="Email">
+                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="str_Email" />
+                </InArgument>
+                <InArgument x:TypeArguments="x:String" x:Key="Phone Number">
+                  <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="str_PhoneNumber" />
+                </InArgument>
               </ui:AddQueueItem.ItemInformation>
             </ui:AddQueueItem>
             <Assign DisplayName="Assign - Increment Transaction Count" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_2">
@@ -259,6 +285,6 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEachRow>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="410,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;Added &quot;+out_TransactionCount.ToString+&quot; item/s to the queue&quot;]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="583,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;Added &quot;+out_TransactionCount.ToString+&quot; item/s to the queue&quot;]" />
   </Sequence>
 </Activity>
