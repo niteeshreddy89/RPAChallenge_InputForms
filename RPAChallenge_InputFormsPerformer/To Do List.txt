@@ -1,0 +1,20 @@
+Success => Increment Transaction Count
+
+Business Exception =>
+1. Send Exception Mail
+2. Increment Transaction Count
+An exception has occured on 'Machine Name' while executing the process 'Process Name' due to which the below mentioned transaction was not procssed correctly.
+Transaction ID:
+Exception Source:
+Exception Message:
+
+System Exception =>
+1. Add to retry if an item is in progress
+2. End processing
+3. Send Termination Mail
+
+Completed =>
+1. Send process completion mail
+The process 'Process name' was completed succesfully on 'Machine Name'. Below are the stats:
+Successful: 8
+Business Exceptions: 2
