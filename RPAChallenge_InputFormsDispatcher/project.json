@@ -1,6 +1,6 @@
 {
   "name": "RPAChallenge_InputFormsDispatcher",
-  "description": "Logic for working on the RPA Challenge - Input Forms",
+  "description": "Logic for working on the RPA Challenge - Input Forms. This process downloads the input excel file from the RPA Challenge website & adds the data to the Orchestrator Queue for further processing",
   "main": "Main.xaml",
   "dependencies": {
     "UiPath.Credentials.Activities": "[1.1.6479.13204]",
@@ -13,7 +13,7 @@
   "entitiesStores": [],
   "schemaVersion": "4.0",
   "studioVersion": "20.4.1.0",
-  "projectVersion": "1.0.6",
+  "projectVersion": "1.0.7",
   "runtimeOptions": {
     "autoDispose": false,
     "isPausable": true,

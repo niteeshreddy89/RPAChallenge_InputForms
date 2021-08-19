@@ -3,6 +3,7 @@
   "description": "Logic for working on the RPA Challenge - Input Forms: This flow processes the transactions available in the orchestrator queue",
   "main": "Main.xaml",
   "dependencies": {
+    "Microsoft.Activities.Extensions": "[2.0.6.9]",
     "UiPath.Excel.Activities": "[2.10.4]",
     "UiPath.System.Activities": "[21.4.1]",
     "UiPath.UIAutomation.Activities": "[21.4.4]"
